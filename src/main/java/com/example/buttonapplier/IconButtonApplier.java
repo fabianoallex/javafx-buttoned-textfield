@@ -8,8 +8,8 @@ import javafx.scene.shape.SVGPath;
 
 import java.util.ArrayList;
 
-public abstract class ButtonIconApplier extends ButtonApplier {
-    public ButtonIconApplier(Button button) {
+public abstract class IconButtonApplier extends ButtonApplier {
+    public IconButtonApplier(Button button) {
         super(button);
     }
 

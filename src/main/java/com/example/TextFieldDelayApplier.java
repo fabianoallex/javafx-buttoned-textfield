@@ -5,7 +5,6 @@ import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.TextField;
 import javafx.util.Duration;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -89,7 +88,6 @@ class TimelineDelay {
     }
 
     public void suspend() {
-        if (timeline != null)
-            timeline.stop();
+        if (timeline != null) timeline.stop();
     }
 }

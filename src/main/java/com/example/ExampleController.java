@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.buttonapplier.ButtonIconApplierFactory;
+import com.example.buttonapplier.IconButtonFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import java.net.URL;
@@ -16,10 +16,10 @@ public class ExampleController implements Initializable  {
         var rightCloseButton = buttonedDelayTextField.addRightButton();
         var rightSearchButton = buttonedDelayTextField.addRightButton();
 
-        ButtonIconApplierFactory.closeIcon(leftCloseButton).applyIcon();
-        ButtonIconApplierFactory.searchIcon(leftSearchButton).applyIcon();
-        ButtonIconApplierFactory.closeIcon(rightCloseButton).applyIcon();
-        ButtonIconApplierFactory.searchIcon(rightSearchButton).applyIcon();
+        IconButtonFactory.closeIcon(leftCloseButton).applyIcon();
+        IconButtonFactory.searchIcon(leftSearchButton).applyIcon();
+        IconButtonFactory.closeIcon(rightCloseButton).applyIcon();
+        IconButtonFactory.searchIcon(rightSearchButton).applyIcon();
 
         leftCloseButton.setOnAction(event -> {
             System.out.println("left close button click");
