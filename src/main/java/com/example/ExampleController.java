@@ -1,56 +1,55 @@
 package com.example;
 
-import com.example.buttonapplier.IconFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ExampleController implements Initializable  {
-    @FXML private ButtonedDelayTextField buttonedDelayTextField;
+    @FXML
+    private SearchField<CepDisplay> searchField1;
+    @FXML
+    private SearchField<CepDisplay> searchField2;
+    @FXML
+    private SearchField<CepDisplay> searchField3;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        var leftCloseButton = buttonedDelayTextField.addLeftButton();
-        var leftSearchButton = buttonedDelayTextField.addLeftButton();
-        var rightCloseButton = buttonedDelayTextField.addRightButton();
-        var rightSearchButton = buttonedDelayTextField.addRightButton();
+        SearchField.SearchListner<CepDisplay> searchListner = (searchField, searchText) -> {
+            if (searchText.isEmpty()) {
+                System.out.println("here is needed to implement search by an modal screen");
+            } else {
+                searchField.setValue(new CepDisplay(Cep.createCep(searchText)));
+            }
+        };
 
-        IconFactory.closeIcon(leftCloseButton).applyIcon();
-        IconFactory.searchIcon(leftSearchButton).applyIcon();
-        IconFactory.closeIcon(rightCloseButton).applyIcon();
-        IconFactory.searchIcon(rightSearchButton).applyIcon();
+        SearchField.ClearListner<CepDisplay> clearListner = (searchField, oldValue) -> {
+            if (oldValue == null)
+                return;
 
-        leftCloseButton.setOnAction(event -> {
-            System.out.println("left close button click");
-            buttonedDelayTextField.getTextFieldDelayApplier().textField.clear();
-            buttonedDelayTextField.getTextFieldDelayApplier().textField.requestFocus();
-        });
+            System.out.printf("o Cep %s foi removido.%n", oldValue.cep.getCep());
+        };
 
-        leftSearchButton.setOnAction(event -> {
-            buttonedDelayTextField.getTextFieldDelayApplier().suspend(); //stop running delays
-            System.out.println("left search button click");
-        });
+        searchField1.getTextField().promptTextProperty().set("Informe o cep");
+        searchField2.getTextField().promptTextProperty().set("Informe o cep");
+        searchField3.getTextField().promptTextProperty().set("Informe o cep");
+        searchField1.setSearchListner(searchListner);
+        searchField2.setSearchListner(searchListner);
+        searchField3.setSearchListner(searchListner);
+        searchField1.setClearListner(clearListner);
+        searchField2.setClearListner(clearListner);
+        searchField3.setClearListner(clearListner);
+    }
+}
 
-        rightCloseButton.setOnAction(event -> {
-            System.out.println("right close button click");
-            buttonedDelayTextField.getTextFieldDelayApplier().setTextSilently("");
-            buttonedDelayTextField.getTextFieldDelayApplier().textField.requestFocus();
-        });
+class CepDisplay {
+    Cep cep;
+    CepDisplay(Cep cep) {
+        this.cep = cep;
+    }
 
-        rightSearchButton.setOnAction(event -> System.out.println("right search button click"));
-
-        buttonedDelayTextField.getTextFieldDelayApplier().addDelayListener(100,
-                (oldValue, newValue) ->
-                        System.out.printf("Listener 1.0) --> it was \"%s\" now it is \"%s\"%n", oldValue, newValue));
-
-        buttonedDelayTextField.getTextFieldDelayApplier().addDelayListener(100,
-                (oldValue, newValue) ->
-                        System.out.printf("Listener 1.1) --> it was \"%s\" now it is \"%s\"%n", oldValue, newValue));
-
-        buttonedDelayTextField.getTextFieldDelayApplier().addDelayListener(2000, (oldValue, newValue) -> {
-            System.out.printf("Listener 2.0) --> it was \"%s\" now it is \"%s\"%n", oldValue, newValue);
-            //buttonedDelayTextField.getTextFieldDelayApplyer().setTextSilently(""); //setTextSilently prevent recursive changes
-        });
+    @Override
+    public String toString() {
+        return "[%s - %s/%s - %s]".formatted(cep.getCep(), cep.getLocalidade(), cep.getUf(), cep.getLogradouro());
     }
 }

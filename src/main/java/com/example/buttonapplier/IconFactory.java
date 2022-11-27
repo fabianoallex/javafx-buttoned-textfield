@@ -7,7 +7,7 @@ public class IconFactory {
         return new SearchIcon(button);
     }
 
-    public static CloseIcon closeIcon(Button button) {
-        return new CloseIcon(button);
+    public static ClearIcon clearIcon(Button button) {
+        return new ClearIcon(button);
     }
 }

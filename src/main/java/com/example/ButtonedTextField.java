@@ -16,7 +16,9 @@ public class ButtonedTextField extends AnchorPane implements Initializable {
     private final ArrayList<Button> leftButtons = new ArrayList<>();
     private int rightPadding = 5;
     private int leftPadding = 5;
-    @FXML private TextField textField;
+
+    @FXML
+    private TextField textField;
 
     public ButtonedTextField(){
         try {
