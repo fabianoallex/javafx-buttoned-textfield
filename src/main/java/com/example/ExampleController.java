@@ -17,7 +17,7 @@ public class ExampleController implements Initializable  {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         SearchField.SearchListner<CepDisplay> searchListner = (searchField, searchText) -> {
             if (searchText.isEmpty()) {
-                System.out.println("here is needed to implement search by an modal screen");
+                System.out.println("aqui poderá ser implementada a busca por uma tela.");
             } else {
                 searchField.setValue(new CepDisplay(Cep.createCep(searchText)));
             }
@@ -30,8 +30,8 @@ public class ExampleController implements Initializable  {
             System.out.printf("o Cep %s foi removido.%n", oldValue.cep.getCep());
         };
 
-        searchField1.getTextField().promptTextProperty().set("Informe o cep");
-        searchField2.getTextField().promptTextProperty().set("Informe o cep");
+        searchField1.getTextField().promptTextProperty().set("Informe o cep.");
+        searchField2.getTextField().promptTextProperty().set("Informe o cep.");
         searchField3.getTextField().promptTextProperty().set("Informe o cep");
         searchField1.setSearchListner(searchListner);
         searchField2.setSearchListner(searchListner);
